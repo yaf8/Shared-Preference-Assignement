@@ -1,6 +1,7 @@
 package com.example.assigntry;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtID, edtFullName;
     private Button btnSave, btnUpdate, btnDelete, btnSearch, btnDeleteAll, btnDisplay;
 
+    @SuppressLint("StaticFieldLeak")
     public static StudentAdapter adapter;
     public static Gson gson;
     public static ArrayList<StudentModal> StudentModalArrayList;
@@ -80,8 +82,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void deleteAll() {
-        SharedPreferences settings = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
-        settings.edit().clear().commit();
+        StudentModalArrayList.clear();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        gson = new Gson();
+
+        String json = gson.toJson(StudentModalArrayList);
+
+        editor.putString(MainActivity.STUD_PREF_KEY, json);
+
+        editor.apply();
+
         Toast.makeText(this, "Data Cleared", Toast.LENGTH_SHORT).show();
     }
 
@@ -114,6 +128,9 @@ public class MainActivity extends AppCompatActivity {
         editor.putString(STUD_PREF_KEY, json);
 
         editor.apply();
+
+        edtID.setText("");
+        edtFullName.setText("");
 
         Toast.makeText(this, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
     }
