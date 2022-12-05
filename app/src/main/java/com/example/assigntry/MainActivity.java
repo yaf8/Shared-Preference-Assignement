@@ -47,15 +47,11 @@ public class MainActivity extends AppCompatActivity {
         loadData();
 
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!(edtID.getText().toString().isEmpty()) && !(edtFullName.getText().toString()).isEmpty()) {
-                    StudentModalArrayList.add(new StudentModal(edtID.getText().toString(), edtFullName.getText().toString()));
-                    adapter.notifyItemInserted(StudentModalArrayList.size());
-                    saveData();
-
-                }
+        btnSave.setOnClickListener(v -> {
+            if (!(edtID.getText().toString().isEmpty()) && !(edtFullName.getText().toString()).isEmpty()) {
+                StudentModalArrayList.add(new StudentModal(edtID.getText().toString(), edtFullName.getText().toString()));
+                adapter.notifyItemInserted(StudentModalArrayList.size());
+                saveData();
             }
         });
 
