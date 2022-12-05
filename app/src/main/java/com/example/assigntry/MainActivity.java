@@ -49,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!(edtID.getText().toString().isEmpty()) && !(edtFullName.getText().toString()).isEmpty())
-                {
+                if (!(edtID.getText().toString().isEmpty()) && !(edtFullName.getText().toString()).isEmpty()) {
                     StudentModalArrayList.add(new StudentModal(edtID.getText().toString(), edtFullName.getText().toString()));
                     adapter.notifyItemInserted(StudentModalArrayList.size());
                     saveData();
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(v -> {
 
         });
-
+    }
     private void deleteAll() {
         SharedPreferences settings = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
         settings.edit().clear().commit();
