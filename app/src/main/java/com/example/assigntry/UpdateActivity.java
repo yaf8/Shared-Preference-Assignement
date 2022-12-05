@@ -5,12 +5,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.Objects;
 
@@ -77,6 +80,20 @@ public class UpdateActivity extends AppCompatActivity {
                     {
                         MainActivity.StudentModalArrayList.get(i).setID(newID);
                         MainActivity.StudentModalArrayList.get(i).setFullName(newFullName);
+
+
+                        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.STUD_PREF_NAME, MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        MainActivity.gson = new Gson();
+
+                        String json = MainActivity.gson.toJson(MainActivity.StudentModalArrayList);
+
+                        editor.putString(MainActivity.STUD_PREF_KEY, json);
+
+                        editor.apply();
+
 
                         Toast.makeText(this, "Update", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, MainActivity.class);
