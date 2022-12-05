@@ -72,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         btnDelete.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, DeleteActivity.class);
+            startActivity(intent);
         });
     }
     private void deleteAll() {
