@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSave, btnUpdate, btnDelete, btnSearch, btnDeleteAll, btnDisplay;
 
     public static StudentAdapter adapter;
+    public static Gson gson;
     public static ArrayList<StudentModal> StudentModalArrayList;
     public static final String STUD_PREF_NAME = "Stud_Prefs";
     public static final String STUD_PREF_KEY = "stud_key";
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        Gson gson = new Gson();
+        gson = new Gson();
 
         String json = gson.toJson(StudentModalArrayList);
 
