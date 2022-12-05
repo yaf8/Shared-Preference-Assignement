@@ -49,11 +49,12 @@ public class UpdateActivity extends AppCompatActivity {
 
     private void update() {
 
-        String searchID = edtUpdate.getText().toString();
+        String searchID = edtUpdate.getText().toString(), newID = edtUpdateID.getText().toString(), newFullName = edtUpdateFullName.getText().toString();
         for (StudentModal str : MainActivity.StudentModalArrayList) {
             if(Objects.equals(str.getID(), searchID))
             {
-
+                edtUpdateID.setVisibility(View.VISIBLE);
+                edtUpdateFullName.setVisibility(View.VISIBLE);
             }
         }
     }
