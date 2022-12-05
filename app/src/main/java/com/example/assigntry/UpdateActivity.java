@@ -21,7 +21,6 @@ public class UpdateActivity extends AppCompatActivity {
 
     private Button btnUpdate, btnBack, btnFind;
     private EditText edtUpdate, edtUpdateID, edtUpdateFullName;
-    private TextView textSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class UpdateActivity extends AppCompatActivity {
         edtUpdate = findViewById(R.id.edtUpdate);
         edtUpdateID = findViewById(R.id.edtUpdateID);
         edtUpdateFullName = findViewById(R.id.edtUpdateFullName);
-        textSearch = findViewById(R.id.textSearch);
 
         edtUpdateID.setVisibility(View.INVISIBLE);
         edtUpdateFullName.setVisibility(View.INVISIBLE);
@@ -74,38 +72,30 @@ public class UpdateActivity extends AppCompatActivity {
     private void update() {
         String findID = edtUpdate.getText().toString(), newID = edtUpdateID.getText().toString(), newFullName = edtUpdateFullName.getText().toString();
 
-                for(int i = 0; i < MainActivity.StudentModalArrayList.size(); i++)
-                {
-                    if(Objects.equals(MainActivity.StudentModalArrayList.get(i).getID(), findID))
-                    {
-                        MainActivity.StudentModalArrayList.get(i).setID(newID);
-                        MainActivity.StudentModalArrayList.get(i).setFullName(newFullName);
+        for(int i = 0; i < MainActivity.StudentModalArrayList.size(); i++)
+        {
+            if(Objects.equals(MainActivity.StudentModalArrayList.get(i).getID(), findID))
+            {
+                MainActivity.StudentModalArrayList.get(i).setID(newID);
+                MainActivity.StudentModalArrayList.get(i).setFullName(newFullName);
+
+                SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.STUD_PREF_NAME, MODE_PRIVATE);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                MainActivity.gson = new Gson();
+
+                String json = MainActivity.gson.toJson(MainActivity.StudentModalArrayList);
+
+                editor.putString(MainActivity.STUD_PREF_KEY, json);
+
+                editor.apply();
 
 
-                        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.STUD_PREF_NAME, MODE_PRIVATE);
-
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                        MainActivity.gson = new Gson();
-
-                        String json = MainActivity.gson.toJson(MainActivity.StudentModalArrayList);
-
-                        editor.putString(MainActivity.STUD_PREF_KEY, json);
-
-                        editor.apply();
-
-
-                        Toast.makeText(this, "Update", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                }
-                //str.setID(newID);
-                //str.setFullName(newFullName);
-
-
-
+                Toast.makeText(this, "Update", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+        }
     }
-
-
 }

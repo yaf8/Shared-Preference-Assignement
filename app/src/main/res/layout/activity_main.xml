@@ -22,7 +22,7 @@
             android:textAllCaps="true"
             android:textColor="#BEA8F3"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
