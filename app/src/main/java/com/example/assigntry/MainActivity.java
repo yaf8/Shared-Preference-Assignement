@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
         btnUpdate = findViewById(R.id.btnUpdate);
+        btnSearch = findViewById(R.id.btnSearch);
         btnDeleteAll = findViewById(R.id.btnDeleteAll);
         btnDisplay = findViewById(R.id.btnDisplay);
 
@@ -67,13 +68,18 @@ public class MainActivity extends AppCompatActivity {
             deleteAll();
         });
 
+        btnUpdate.setOnClickListener(v -> {
+            Intent intent1 = new Intent(this, UpdateActivity.class);
+            startActivity(intent1);
+        });
+
         btnSearch.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SearchActivity.class);
-            startActivity(intent);
+            Intent intent2 = new Intent(this, SearchActivity.class);
+            startActivity(intent2);
         });
         btnDelete.setOnClickListener(v -> {
-            Intent intent = new Intent(this, DeleteActivity.class);
-            startActivity(intent);
+            Intent intent3 = new Intent(this, DeleteActivity.class);
+            startActivity(intent3);
         });
     }
     private void deleteAll() {
