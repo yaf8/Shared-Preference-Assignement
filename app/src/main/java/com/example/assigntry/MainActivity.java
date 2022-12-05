@@ -1,6 +1,7 @@
 package com.example.assigntry;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -21,11 +22,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtID, edtFullName;
-    private Button addBtn, saveBtn;
-    private RecyclerView studentRV;
+    private Button btnSave, btnUpdate, btnDelete, btnSearch, btnDeleteAll, btnDisplay;
 
-    private StudentAdapter adapter;
-    private ArrayList<StudentModal> StudentModalArrayList;
+    public static StudentAdapter adapter;
+    public static ArrayList<StudentModal> StudentModalArrayList;
     public static final String STUD_PREF_NAME = "Stud_Prefs";
     public static final String STUD_PREF_KEY = "stud_key";
 
@@ -36,42 +36,52 @@ public class MainActivity extends AppCompatActivity {
 
         edtID = findViewById(R.id.edtID);
         edtFullName = findViewById(R.id.edtFullName);
-        addBtn = findViewById(R.id.idBtnAdd);
-        saveBtn = findViewById(R.id.idBtnSave);
-        studentRV = findViewById(R.id.idRVStudent);
+        btnSave = findViewById(R.id.btnSave);
+        btnDelete = findViewById(R.id.btnDelete);
+        btnUpdate = findViewById(R.id.btnUpdate);
+        btnDeleteAll = findViewById(R.id.btnDeleteAll);
+        btnDisplay = findViewById(R.id.btnDisplay);
+
 
         loadData();
 
-        buildRecyclerView();
 
-        addBtn.setOnClickListener(new View.OnClickListener() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!(edtID.getText().toString().isEmpty()) && !(edtFullName.getText().toString()).isEmpty())
                 {
                     StudentModalArrayList.add(new StudentModal(edtID.getText().toString(), edtFullName.getText().toString()));
                     adapter.notifyItemInserted(StudentModalArrayList.size());
+                    saveData();
+
                 }
             }
         });
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveData();
-            }
+
+        btnDisplay.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DisplayActivity.class);
+            startActivity(intent);
         });
+
+        btnDeleteAll.setOnClickListener(v -> {
+            deleteAll();
+        });
+
+        btnSearch.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
+        });
+        btnDelete.setOnClickListener(v -> {
+
+        });
+
+    private void deleteAll() {
+        SharedPreferences settings = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
+        settings.edit().clear().commit();
+        Toast.makeText(this, "Data Cleared", Toast.LENGTH_SHORT).show();
     }
 
-    private void buildRecyclerView() {
-        adapter = new StudentAdapter(StudentModalArrayList, MainActivity.this);
-
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        studentRV.setHasFixedSize(true);
-
-        studentRV.setLayoutManager(manager);
-
-        studentRV.setAdapter(adapter);
-    }
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);

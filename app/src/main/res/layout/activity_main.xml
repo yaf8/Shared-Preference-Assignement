@@ -1,51 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1F0F0"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/edtID"
+    <RelativeLayout
+        android:id="@+id/RelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/idBtnSave"
-        android:layout_toLeftOf="@id/idBtnSave"
-        android:hint="Enter Your ID" />
+        android:layout_height="65dp"
+        android:background="#5A24B3"
+        android:gravity="center">
 
-    <EditText
-        android:id="@+id/edtFullName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edtID"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_toStartOf="@id/idBtnAdd"
-        android:hint="Enter Your Full Name" />
+        <TextView
+            android:id="@+id/TextViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Section N1 Students List"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#BEA8F3"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
 
-    <!--button for adding data to recycler view-->
-    <Button
-        android:id="@+id/idBtnAdd"
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edtID"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:text="Add" />
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="170dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/idBtnSave"
+        <EditText
+            android:id="@+id/edtID"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FAE5A7"
+            android:hint="ID"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtFullName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#FAE5A7"
+            android:hint="Full Name"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutButtonRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:text="Save " />
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/idRVStudent"
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/btnDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="35dp"
+            android:text="Display" />
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="35dp"
+            android:text="Update" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="35dp"
+            android:text="Delete" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutButtonBottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/edtFullName" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:text="Search" />
+
+        <Button
+            android:id="@+id/btnDeleteAll"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="40dp"
+            android:text="Delete All" />
+
+    </LinearLayout>
 
 </RelativeLayout>
