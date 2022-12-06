@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,7 +58,21 @@ public class DeleteActivity extends AppCompatActivity {
             if(Objects.equals(str.getID(), findID))
             {
                 btnDelete.setVisibility(View.VISIBLE);
-                Toast.makeText(this, "Found", Toast.LENGTH_SHORT).show();
+
+                MainActivity.greenToastMessage.setText("ID Found");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(MainActivity.greenToastLayout);
+                toast.show();
+            }
+            else{
+                MainActivity.blueToastMessage.setText("ID Not Found");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(MainActivity.blueToastLayout);
+                toast.show();
             }
         }
     }
@@ -83,10 +98,13 @@ public class DeleteActivity extends AppCompatActivity {
 
                 editor.apply();
 
+                MainActivity.redToastMessage.setText("Deleted Successfully");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(MainActivity.redToastLayout);
+                toast.show();
 
-                Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
             }
         }
     }

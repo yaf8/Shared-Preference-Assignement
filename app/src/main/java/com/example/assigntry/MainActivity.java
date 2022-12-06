@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String STUD_PREF_KEY = "stud_key";
     public static LayoutInflater liBlue, liRed, liGreen;
     public static View blueToastLayout, redToastLayout, greenToastLayout;
-    private static TextView blueToastMessage, redToastMessage, greenToastMessage;
+    public static TextView blueToastMessage, redToastMessage, greenToastMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

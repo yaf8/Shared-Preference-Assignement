@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,7 +93,13 @@ public class UpdateActivity extends AppCompatActivity {
                 editor.apply();
 
 
-                Toast.makeText(this, "Update", Toast.LENGTH_SHORT).show();
+                MainActivity.blueToastMessage.setText("Updated Successfully");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(MainActivity.blueToastLayout);
+                toast.show();
+
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
