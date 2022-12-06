@@ -5,9 +5,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<StudentModal> StudentModalArrayList;
     public static final String STUD_PREF_NAME = "Stud_Prefs";
     public static final String STUD_PREF_KEY = "stud_key";
+    public static LayoutInflater liBlue, liRed, liGreen;
+    public static View blueToastLayout, redToastLayout, greenToastLayout;
+    private static TextView blueToastMessage, redToastMessage, greenToastMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +56,31 @@ public class MainActivity extends AppCompatActivity {
         loadData();
 
 
+        liBlue = getLayoutInflater();
+        liRed = getLayoutInflater();
+        liGreen = getLayoutInflater();
+
+        blueToastLayout = liBlue.inflate(R.layout.blue_toast, findViewById(R.id.blue_toast_layout));
+        redToastLayout = liRed.inflate(R.layout.red_toast,  findViewById(R.id.red_toast_layout));
+        greenToastLayout = liGreen.inflate(R.layout.green_toast, findViewById(R.id.green_toast_layout));
+
+        blueToastMessage = blueToastLayout.findViewById(R.id.blueToastMessage);
+        redToastMessage = redToastLayout.findViewById(R.id.redToastMessage);
+        greenToastMessage = greenToastLayout.findViewById(R.id.greenToastMessage);
+
         btnSave.setOnClickListener(v -> {
             if (!(edtID.getText().toString().isEmpty()) && !(edtFullName.getText().toString()).isEmpty()) {
                 StudentModalArrayList.add(new StudentModal(edtID.getText().toString(), edtFullName.getText().toString()));
                 adapter.notifyItemInserted(StudentModalArrayList.size());
                 saveData();
+
+                greenToastMessage.setText("Saved Successfully");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(greenToastLayout);
+                toast.show();
+
             }
         });
 
@@ -96,7 +122,12 @@ public class MainActivity extends AppCompatActivity {
 
         editor.apply();
 
-        Toast.makeText(this, "Data Cleared", Toast.LENGTH_SHORT).show();
+        redToastMessage.setText("Data Cleared");
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+        toast.setView(redToastLayout);
+        toast.show();
     }
 
 
@@ -131,7 +162,5 @@ public class MainActivity extends AppCompatActivity {
 
         edtID.setText("");
         edtFullName.setText("");
-
-        Toast.makeText(this, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
     }
 }
