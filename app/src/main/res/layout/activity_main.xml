@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1F0F0"
     tools:context=".MainActivity">
 
     <RelativeLayout
         android:id="@+id/RelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#5A24B3"
+        android:layout_height="50dp"
+        android:background="#4529C1"
         android:gravity="center">
 
         <TextView
@@ -33,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:background="#DCD9D9"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="180dp"
         android:orientation="vertical">
 
         <EditText
@@ -70,6 +69,7 @@
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:backgroundTint="#39802C"
             android:text="Save" />
 
         <Button
@@ -83,6 +83,7 @@
             android:id="@+id/btnUpdate"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:backgroundTint="#3948A8"
             android:layout_marginTop="35dp"
             android:text="Update" />
 
@@ -90,6 +91,7 @@
             android:id="@+id/btnDelete"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:backgroundTint="#9E3535"
             android:layout_marginTop="35dp"
             android:text="Delete" />
     </LinearLayout>
@@ -106,6 +108,8 @@
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="120dp"
+            android:textColor="@color/black"
+            android:backgroundTint="#FFC107"
             android:layout_height="60dp"
             android:text="Search" />
 
@@ -113,6 +117,7 @@
             android:id="@+id/btnDeleteAll"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:backgroundTint="#DD1A1A"
             android:layout_marginStart="40dp"
             android:text="Delete All" />
 
