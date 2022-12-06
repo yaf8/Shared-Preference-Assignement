@@ -22,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,12 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyItemInserted(StudentModalArrayList.size());
                 saveData();
 
-                greenToastMessage.setText("Saved Successfully");
-                Toast toast = new Toast(getApplicationContext());
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
-                toast.setView(greenToastLayout);
-                toast.show();
 
             }
         });
@@ -148,19 +143,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
+        for (StudentModal str : MainActivity.StudentModalArrayList)
+        {
+            if(!(Objects.equals(str.getID(), (edtID.getText().toString()))))
+            {
+                SharedPreferences sharedPreferences = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
 
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        gson = new Gson();
+                gson = new Gson();
 
-        String json = gson.toJson(StudentModalArrayList);
+                String json = gson.toJson(StudentModalArrayList);
 
-        editor.putString(STUD_PREF_KEY, json);
+                editor.putString(STUD_PREF_KEY, json);
 
-        editor.apply();
+                editor.apply();
 
-        edtID.setText("");
-        edtFullName.setText("");
+
+                greenToastMessage.setText("Saved Successfully");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(greenToastLayout);
+                toast.show();
+
+                edtID.setText("");
+                edtFullName.setText("");
+            }
+            else {
+                blueToastMessage.setText("ID Exists!");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(blueToastLayout);
+                toast.show();
+            }
+        }
     }
 }
